@@ -1,13 +1,22 @@
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
-import { fatchData } from "../utilits";
+import { fetchData } from "../utilits";
 
 const Home = ({ dark }) => {
   const [data, setData] = useState({});
-  useEffect(async () => {
-    setData(await fatchData("/static/info.json"));
-  }, []);
+  
+  useEffect(() => {
+    const fetchHomeData = async () => {
+      try {
+        const response = await fetchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae");
+        setData(response);
+      } catch (error) {
+        console.error("Error fetching home data:", error);
+      }
+    };
 
+    fetchHomeData();
+  }, []);
   return (
     <div className="dizme_tm_section" id="home">
       <div className="dizme_tm_hero">

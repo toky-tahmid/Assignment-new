@@ -6,13 +6,24 @@ import SwiperCore, {
   Pagination,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { fatchData } from "../utilits";
+import { fetchData } from "../utilits";
 SwiperCore.use([Pagination, Navigation, EffectFade, Autoplay]);
 
 const Testimonial = () => {
   const [data, setData] = useState([]);
-  useEffect(async () => {
-    setData(await fatchData("/static/testimonial.json"));
+  useEffect(() => {
+    const fetchTestimonialData = async () => {
+      try {
+        const response = await fetchData(
+          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
+        );
+        setData(response.testimonials); // Assuming 'testimonials' is the key for testimonials data in the API response
+      } catch (error) {
+        console.error("Error fetching testimonial data:", error);
+      }
+    };
+
+    fetchTestimonialData();
   }, []);
   const props = {
     slidesPerView: 1,
