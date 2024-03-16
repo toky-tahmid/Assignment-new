@@ -75,13 +75,13 @@ const Service = ({ dark }) => {
                             )}
                           </span>
                           <div className="title">
-                            <h3>{data.title}</h3>
+                            <h3>{data.name}</h3>
                             <span className="price">
-                              Starts from <span>${data.price}</span>
+                              Starts from <span>{data.charge}</span>
                             </span>
                           </div>
                           <div className="text">
-                            <p>{data.shortDec}</p>
+                            <p>{data.desc}</p>
                           </div>
                           <a className="dizme_tm_full_link" href="#" />
                           <img

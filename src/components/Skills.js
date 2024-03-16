@@ -3,8 +3,9 @@ import { activeSkillProgress, fatchData } from "../utilits";
 
 const Skills = ({ dark }) => {
   const [data, setData] = useState({});
+  console.log(data?.user?.skills);
   useEffect(async () => {
-    setData(await fatchData("/static/info.json"));
+    setData(await fatchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"));
   }, []);
   useEffect(() => {
     window.addEventListener("scroll", activeSkillProgress);
@@ -33,17 +34,16 @@ const Skills = ({ dark }) => {
                 data-wow-duration="1s"
               >
                 {data &&
-                  data.skills &&
-                  data.skills.map((skill, i) => (
+                  data?.user?.skills?.map((skill, i) => (
                     <div
                       className="progress_inner skillsInner___"
-                      data-value={skill.value}
-                      data-color={skill.color}
+                      data-value={skill?.percentage}
+                      data-color={'rgb(247, 80, 35)'}
                       key={i}
                     >
                       <span>
-                        <span className="label">{skill.name}</span>
-                        <span className="number">{skill.value}%</span>
+                        <span className="label">{skill?.name}</span>
+                        <span className="number">{skill?.percentage}%</span>
                       </span>
                       <div className="background">
                         <div className="bar">

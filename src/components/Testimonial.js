@@ -10,9 +10,9 @@ import { fatchData } from "../utilits";
 SwiperCore.use([Pagination, Navigation, EffectFade, Autoplay]);
 
 const Testimonial = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   useEffect(async () => {
-    setData(await fatchData("/static/testimonial.json"));
+    setData(await fatchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"));
   }, []);
   const props = {
     slidesPerView: 1,
@@ -39,7 +39,7 @@ const Testimonial = () => {
             <div className="in">
               <Swiper {...props} className="">
                 {data &&
-                  data.map((data, i) => (
+              data?.user?.testimonials?.map((data, i) => (
                     <SwiperSlide key={i}>
                       <div className="icon">
                         <svg
@@ -63,15 +63,15 @@ const Testimonial = () => {
                         </svg>
                       </div>
                       <div className="text">
-                        <p>{data.details}</p>
+                        <p>{data.review}</p>
                       </div>
                       <div className="short">
                         <div className="image">
-                          <div className="main" data-img-url={data.img} />
+                          <div className="main" data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'} />
                         </div>
                         <div className="detail">
                           <h3>{data.name}</h3>
-                          <span>{data.profession}</span>
+                          <span>{data.position}</span>
                         </div>
                       </div>
                     </SwiperSlide>
@@ -83,25 +83,25 @@ const Testimonial = () => {
               <div
                 className="det_image one wow fadeIn"
                 data-wow-duration="1s"
-                data-img-url="img/testimonials/2.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <div
                 className="det_image two wow fadeIn"
                 data-wow-duration="1s"
                 data-wow-delay="0.2s"
-                data-img-url="img/testimonials/1.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <div
                 className="det_image three wow fadeIn"
                 data-wow-duration="1s"
                 data-wow-delay="0.4s"
-                data-img-url="img/testimonials/3.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <div
                 className="det_image four wow fadeIn"
                 data-wow-duration="1s"
                 data-wow-delay="0.6s"
-                data-img-url="img/testimonials/4.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <span className="circle green animPulse" />
               <span className="circle yellow animPulse" />
@@ -111,19 +111,19 @@ const Testimonial = () => {
               <div
                 className="det_image one wow fadeIn"
                 data-wow-duration="1s"
-                data-img-url="img/testimonials/5.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <div
                 className="det_image two wow fadeIn"
                 data-wow-duration="1s"
                 data-wow-delay="0.2s"
-                data-img-url="img/testimonials/6.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <div
                 className="det_image three wow fadeIn"
                 data-wow-duration="1s"
                 data-wow-delay="0.4s"
-                data-img-url="img/testimonials/7.jpg"
+                data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'}
               />
               <span className="circle yellow animPulse" />
               <span className="circle purple animPulse" />

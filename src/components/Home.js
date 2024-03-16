@@ -1,17 +1,19 @@
 import parse from "html-react-parser";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const Home = ({ dark }) => {
   const [data, setData] = useState({});
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae");
+        const response = await fetch(
+          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
+        );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -35,16 +37,32 @@ const Home = ({ dark }) => {
                 <h3 className="orangeText">{`Hello, I'm`}</h3>
               </div>
               <div className="name">
-              <h3>{data && data.user && data.user.about && data.user.about.name ? data.user.about.name : "name"}</h3>
+                <h3>
+                  {data && data.user && data.user.about && data.user.about.name
+                    ? data.user.about.name
+                    : "name"}
+                </h3>
               </div>
               <div className="job">
                 <p>
                   A <span className="greenText">{data?.user?.about?.name}</span>{" "}
-                  From <span className="purpleText">{data && data.user && data.user.about && data.user.about.address ? data.user.about.address : "address"}</span>
+                  From{" "}
+                  <span className="purpleText">
+                    {data &&
+                    data.user &&
+                    data.user.about &&
+                    data.user.about.address
+                      ? data.user.about.address
+                      : "address"}
+                  </span>
                 </p>
               </div>
               <div className="text">
-                <p>{data && data.user && data.user.about && data.user.about.quote ? data.user.about.quote : "quote"}</p>
+                <p>
+                  {data && data.user && data.user.about && data.user.about.quote
+                    ? data.user.about.quote
+                    : "quote"}
+                </p>
               </div>
               <div className="button">
                 <div className="dizme_tm_button">
@@ -52,14 +70,36 @@ const Home = ({ dark }) => {
                     <span>About Me</span>
                   </a>
                 </div>
+                {/* <div className="social">
+  <ul>
+    {data && data?.user?.social_handles?.map((social, i) => (
+      <li key={i}>
+        <a href="#">
+          <i className={` ${social.image.url}`} />
+        </a>
+      </li>
+    ))}
+  </ul>
+</div> */}
+
                 <div className="social">
-                  <ul>
+                  <ul
+                    style={{
+                      display: "flex",
+                      listStyleType: "none",
+                      margin: 0,
+                      padding: 0,
+                    }}
+                  >
                     {data &&
-                      data.social &&
-                      data.social.map((social, i) => (
-                        <li key={i}>
-                          <a href="#">
-                            <i className={social.icon} />
+                      data?.user?.social_handles?.map((social, i) => (
+                        <li key={i} style={{ marginRight: "10px" }}>
+                          <a href={social.url}>
+                            <img
+                              src={social.image.url}
+                              alt={social.platform}
+                              style={{ width: "40px", height: "auto" }}
+                            />
                           </a>
                         </li>
                       ))}
