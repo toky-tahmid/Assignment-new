@@ -1,27 +1,24 @@
-/* eslint-disable @next/next/no-img-element */
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
-import { fetchData } from "../utilits";
+import { fatchData } from "../utilits";
 import ServicePopup from "./popup/ServicePopup";
 
 const Service = ({ dark }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
+  
   const [popupdata, setPopupdata] = useState({});
   const [popup, setPopup] = useState(false);
-
-  useEffect(() => {
-    const fetchServiceData = async () => {
-      try {
-        const response = await fetchData(
-          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-        );
-        setData(response.services); 
-      } catch (error) {
-        console.error("Error fetching service data:", error);
-      }
-    };
-
-    fetchServiceData();
+  useEffect(async () => {
+    setData(await fatchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"));
+    setTimeout(() => {
+      let VanillaTilt = require("vanilla-tilt");
+      VanillaTilt.init(document.querySelectorAll(".tilt-effect"), {
+        maxTilt: 6,
+        easing: "cubic-bezier(.03,.98,.52,.99)",
+        speed: 500,
+        transition: true,
+      });
+    }, 1000);
   }, []);
 
   const onClick = (index) => {
@@ -49,9 +46,9 @@ const Service = ({ dark }) => {
           <div className="service_list">
             <ul>
               {data &&
-                data.map(
-                  (service, i) =>
-                    service && (
+                data?.user?.services?.map(
+                  (data, i) =>
+                    data && (
                       <li
                         className={`wow ${
                           (i * 1) % 2 === 0 ? "fadeInLeft" : "fadeInRight"
@@ -62,29 +59,29 @@ const Service = ({ dark }) => {
                       >
                         <div className="list_inner tilt-effect">
                           <span className="icon">
-                            {parse(service.icon.svg)}
+                            {/* {parse(data.icon.svg)} */}
                             {dark ? (
                               <img
                                 className="back"
-                                src={service.icon.iconBgDark}
+                                src={data.icon.iconBgDark}
                                 alt="image"
                               />
                             ) : (
                               <img
                                 className="back"
-                                src={service.icon.iconBg}
+                                // src={data.icon.iconBg}
                                 alt="image"
                               />
                             )}
                           </span>
                           <div className="title">
-                            <h3>{service.title}</h3>
+                            <h3>{data.title}</h3>
                             <span className="price">
-                              Starts from <span>${service.price}</span>
+                              Starts from <span>${data.price}</span>
                             </span>
                           </div>
                           <div className="text">
-                            <p>{service.shortDec}</p>
+                            <p>{data.shortDec}</p>
                           </div>
                           <a className="dizme_tm_full_link" href="#" />
                           <img

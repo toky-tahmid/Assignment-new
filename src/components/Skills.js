@@ -1,35 +1,15 @@
 import { useEffect, useState } from "react";
-import { fetchData } from "../utilits";
+import { activeSkillProgress, fatchData } from "../utilits";
 
 const Skills = ({ dark }) => {
   const [data, setData] = useState({});
-
-  useEffect(() => {
-    const fetchSkillsData = async () => {
-      try {
-        const response = await fetchData(
-          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-        );
-        setData(response.skills); 
-      } catch (error) {
-        console.error("Error fetching skills data:", error);
-      }
-    };
-
-    fetchSkillsData();
+  useEffect(async () => {
+    setData(await fatchData("/static/info.json"));
   }, []);
-
   useEffect(() => {
     window.addEventListener("scroll", activeSkillProgress);
-
-    return () => {
-      window.removeEventListener("scroll", activeSkillProgress);
-    };
   }, []);
 
-  const activeSkillProgress = () => {
-    // Your logic for updating skill progress based on scroll position
-  };
   return (
     <div className="dizme_tm_section">
       <div className="dizme_tm_skills">

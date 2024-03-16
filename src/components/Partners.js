@@ -1,24 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchData } from "../utilits";
-
+import { fatchData } from "../utilits";
 const Partners = ({ dark }) => {
   const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchPartnerData = async () => {
-      try {
-        const response = await fetchData(
-          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-        );
-        setData(response.partners); // Assuming 'partners' is the key for partners data in the API response
-      } catch (error) {
-        console.error("Error fetching partner data:", error);
-      }
-    };
-
-    fetchPartnerData();
+  console.log(data);
+  useEffect(async () => {
+    setData(await fatchData("/static/partners.json"));
   }, []);
-
   return (
     <div className="dizme_tm_section">
       <div className="dizme_tm_partners">
@@ -38,7 +25,7 @@ const Partners = ({ dark }) => {
                         src={img.logo && img.logo[dark ? "dark" : "light"]}
                         alt="image"
                       />
-                      <a className="dizme_tm_full_link" a="" href={img.link} />
+                      <a className="dizme_tm_full_link" href={img.link} />
                     </div>
                   </li>
                 ))}
