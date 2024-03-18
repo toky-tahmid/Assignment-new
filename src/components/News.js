@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { aTagClick, fatchData } from "../utilits";
 import BlogPopUp from "./popup/BlogPopUp";
+
 const News = () => {
   const [data, setData] = useState([]);
   const [popupData, setPopupData] = useState({});
   const [popup, setPopup] = useState(false);
   useEffect(async () => {
-    setData(await fatchData("/static/blog.json"));
+    setData(await fatchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"));
     aTagClick();
   }, []);
+  console.log(data?.user?.timeline);
   return (
     <div className="dizme_tm_section" id="blog">
       <BlogPopUp open={popup} data={popupData} close={() => setPopup(false)} />
@@ -21,7 +23,7 @@ const News = () => {
           <div className="news_list">
             <ul>
               {data &&
-                data.map((blog, i) => (
+               data?.user?.timeline?.map((blog, i) => (
                   <li className="wow fadeInUp" data-wow-duration="1s" key={i}>
                     <div className="list_inner">
                       <div className="image">
@@ -34,9 +36,13 @@ const News = () => {
                           }}
                         />
                         <div className="date">
-                          <h3>{blog && blog.date && blog.date.date}</h3>
-                          <span>{blog && blog.date && blog.date.month}</span>
+                          <h3>Starts From:{new Date(blog.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</h3>
+                          <h3>Job Title:{blog.jobTitle}</h3>
+                    
                         </div>
+                        <h3>Job:
+                          {blog.jobLocation}
+                        </h3>
                         <a
                           className="dizme_tm_full_link"
                           href="#"
@@ -47,11 +53,9 @@ const News = () => {
                         />
                       </div>
                       <div className="details">
-                        <span className="category">
-                          <a href="#">{blog.category}</a>
-                        </span>
+                       
                         <h3 className="title">
-                          <a href="#">{blog.title}</a>
+                          <a href="#"> Company:{blog.company_name}</a>
                         </h3>
                       </div>
                       <div className="news_hidden_details">
