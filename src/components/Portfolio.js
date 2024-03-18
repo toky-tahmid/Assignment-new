@@ -45,6 +45,27 @@ const Portfolio = () => {
   // Popup
   const [popup, setPopup] = useState(false);
 
+  const [data, setData] = useState({});
+  console.log(data);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
+        );
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data?.user?.projects[0]?.title);
+
   return (
     <div className="dizme_tm_section" id="portfolio">
       <DetailsPopup open={popup} close={() => setPopup(false)} />
@@ -73,7 +94,7 @@ const Portfolio = () => {
                   className={`c-pointer ${activeBtn("youtube")}`}
                   onClick={handleFilterKeyChange("youtube")}
                 >
-                  Youtube
+                  React
                 </a>
               </li>
               <li>
@@ -81,7 +102,7 @@ const Portfolio = () => {
                   className={`c-pointer ${activeBtn("vimeo")}`}
                   onClick={handleFilterKeyChange("vimeo")}
                 >
-                  Vimeo
+                  Nextjs
                 </a>
               </li>
               <li>
@@ -89,7 +110,7 @@ const Portfolio = () => {
                   className={`c-pointer ${activeBtn("soundcloud")}`}
                   onClick={handleFilterKeyChange("soundcloud")}
                 >
-                  Soundcloud
+                  Mern
                 </a>
               </li>
               <li>
@@ -97,7 +118,7 @@ const Portfolio = () => {
                   className={`c-pointer ${activeBtn("popup")}`}
                   onClick={handleFilterKeyChange("popup")}
                 >
-                  Popup
+                  CSS
                 </a>
               </li>
               <li>
@@ -105,7 +126,7 @@ const Portfolio = () => {
                   className={`c-pointer  ${activeBtn("detail")}`}
                   onClick={handleFilterKeyChange("detail")}
                 >
-                  Detail
+                  Tailwind Css
                 </a>
               </li>
             </ul>
@@ -117,23 +138,16 @@ const Portfolio = () => {
                 <div className="inner">
                   <div
                     className="entry dizme_tm_portfolio_animation_wrap"
-                    data-title="Mockup Shape"
-                    data-category="Youtube"
+                    data-title={data?.user?.projects[0].techStack[0]}
+                    data-category={data?.user?.projects[0]?.title}
                   >
-                    <a
-                      className="popup-youtube"
-                      href="https://www.youtube.com/embed/7e90gBu4pas?autoplay=1"
-                    >
-                      <img src="img/thumbs/42-56.jpg" alt="image" />
+                    <a className="popup-youtube">
+                      <img src={data?.user?.projects[1]?.image.url} />
                       <div
                         className="main"
-                        data-img-url="img/portfolio/1.jpg"
+                        data-img-url={data?.user?.projects[1]?.image.url}
                       />
                     </a>
-                  </div>
-                  <div className="mobile_title">
-                    <h3>Mockup Shape</h3>
-                    <span>Youtube</span>
                   </div>
                 </div>
               </li>
@@ -141,23 +155,16 @@ const Portfolio = () => {
                 <div className="inner">
                   <div
                     className="entry dizme_tm_portfolio_animation_wrap"
-                    data-title="Ave Bottle"
-                    data-category="Vimeo"
+                    data-title={data?.user?.projects[0].techStack[1]}
+                    data-category={data?.user?.projects[0]?.title}
                   >
-                    <a
-                      className="popup-vimeo"
-                      href="https://player.vimeo.com/video/337293658?autoplay=1"
-                    >
-                      <img src="img/thumbs/42-34.jpg" alt="image" />
+                    <a className="popup-vimeo">
+                      <img src={data?.user?.projects[2]?.image.url} />
                       <div
                         className="main"
-                        data-img-url="img/portfolio/2.jpg"
+                        data-img-url={data?.user?.projects[2]?.image.url}
                       />
                     </a>
-                  </div>
-                  <div className="mobile_title">
-                    <h3>Ave Bottle</h3>
-                    <span>Vimeo</span>
                   </div>
                 </div>
               </li>
@@ -165,23 +172,16 @@ const Portfolio = () => {
                 <div className="inner">
                   <div
                     className="entry dizme_tm_portfolio_animation_wrap"
-                    data-title="Magic Art"
-                    data-category="Soundcloud"
+                    data-title="Mern"
+                    data-category={data?.user?.projects[0]?.title}
                   >
-                    <a
-                      className="soundcloude_link mfp-iframe audio"
-                      href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                    >
-                      <img src="img/thumbs/42-56.jpg" alt="image" />
+                    <a className="soundcloude_link mfp-iframe audio">
+                      <img src={data?.user?.projects[3]?.image.url} />
                       <div
                         className="main"
-                        data-img-url="img/portfolio/3.jpg"
+                        data-img-url={data?.user?.projects[3]?.image.url}
                       />
                     </a>
-                  </div>
-                  <div className="mobile_title">
-                    <h3>Magic Art</h3>
-                    <span>Soundcloud</span>
                   </div>
                 </div>
               </li>
@@ -189,20 +189,16 @@ const Portfolio = () => {
                 <div className="inner">
                   <div
                     className="entry dizme_tm_portfolio_animation_wrap"
-                    data-title="Scott Felix"
-                    data-category="Popup"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
                   >
                     <a className="zoom" href="img/portfolio/5.jpg">
-                      <img src="img/thumbs/42-56.jpg" alt="image" />
+                      <img src={data?.user?.projects[4]?.image.url} />
                       <div
                         className="main"
-                        data-img-url="img/portfolio/5.jpg"
+                        data-img-url={data?.user?.projects[4]?.image.url}
                       />
                     </a>
-                  </div>
-                  <div className="mobile_title">
-                    <h3>Blue Lemon</h3>
-                    <span>Popup</span>
                   </div>
                 </div>
               </li>
@@ -210,20 +206,169 @@ const Portfolio = () => {
                 <div className="inner">
                   <div
                     className="entry dizme_tm_portfolio_animation_wrap"
-                    data-title="Art Stone"
-                    data-category="Popup"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
                   >
                     <a className="zoom" href="img/portfolio/4.jpg">
-                      <img src="img/thumbs/42-34.jpg" alt="image" />
+                      <img src={data?.user?.projects[5]?.image.url} />
                       <div
                         className="main"
-                        data-img-url="img/portfolio/4.jpg"
+                        data-img-url={data?.user?.projects[5]?.image.url}
                       />
                     </a>
                   </div>
-                  <div className="mobile_title">
-                    <h3>Art Stone</h3>
-                    <span>Popup</span>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[6]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[6]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[7]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[7]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[8]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[8]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[9]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[9]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[10]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[10]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[11]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[11]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[12]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[12]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[13]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[13]?.image.url}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="popup grid-item">
+                <div className="inner">
+                  <div
+                    className="entry dizme_tm_portfolio_animation_wrap"
+                    data-title={data?.user?.projects[0].techStack[3]}
+                    data-category={data?.user?.projects[0]?.title}
+                  >
+                    <a className="zoom" href="img/portfolio/4.jpg">
+                      <img src={data?.user?.projects[14]?.image.url} />
+                      <div
+                        className="main"
+                        data-img-url={data?.user?.projects[14]?.image.url}
+                      />
+                    </a>
                   </div>
                 </div>
               </li>
@@ -232,20 +377,16 @@ const Portfolio = () => {
                 <div className="inner">
                   <div
                     className="entry dizme_tm_portfolio_animation_wrap"
-                    data-title="Global Evolution"
-                    data-category="Detail"
+                    data-title="Tailwind Css"
+                    data-category={data?.user?.projects[0]?.title}
                   >
                     <a className="portfolio_popup" href="#">
-                      <img src="img/thumbs/42-34.jpg" alt="image" />
+                      <img src={data?.user?.projects[2]?.image.url} />
                       <div
                         className="main"
-                        data-img-url="img/portfolio/6.jpg"
+                        data-img-url={data?.user?.projects[2]?.image.url}
                       />
                     </a>
-                  </div>
-                  <div className="mobile_title">
-                    <h3>Global Evolution</h3>
-                    <span>Detail</span>
                   </div>
                 </div>
               </li>

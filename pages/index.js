@@ -5,7 +5,7 @@ import Contact from "../src/components/Contact";
 import Home from "../src/components/Home";
 import News from "../src/components/News";
 import Newsletter from "../src/components/Newsletter";
-import Partners from "../src/components/Partners";
+// import Partners from "../src/components/Partners";
 import Process from "../src/components/Process";
 import Service from "../src/components/Service";
 import Skills from "../src/components/Skills";
@@ -43,7 +43,7 @@ const Index = () => {
       <Testimonial />
       {/* /TESTIMONIALS */}
       {/* PARTNERS */}
-      <Partners />
+      {/* <Partners /> */}
       {/* /PARTNERS */}
       {/* NEWS */}
       <News />

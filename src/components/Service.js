@@ -5,11 +5,15 @@ import ServicePopup from "./popup/ServicePopup";
 
 const Service = ({ dark }) => {
   const [data, setData] = useState({});
-  
+
   const [popupdata, setPopupdata] = useState({});
   const [popup, setPopup] = useState(false);
   useEffect(async () => {
-    setData(await fatchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"));
+    setData(
+      await fatchData(
+        "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
+      )
+    );
     setTimeout(() => {
       let VanillaTilt = require("vanilla-tilt");
       VanillaTilt.init(document.querySelectorAll(".tilt-effect"), {
@@ -57,22 +61,16 @@ const Service = ({ dark }) => {
                         key={i}
                         onClick={() => onClick(i)}
                       >
+                        <ServicePopup data={data}/>
                         <div className="list_inner tilt-effect">
                           <span className="icon">
                             {/* {parse(data.icon.svg)} */}
-                            {dark ? (
-                              <img
-                                className="back"
-                                src={data.icon.iconBgDark}
-                                alt="image"
-                              />
-                            ) : (
-                              <img
-                                className="back"
-                                // src={data.icon.iconBg}
-                                alt="image"
-                              />
-                            )}
+
+                            <img
+                              className="back"
+                              src={data.image.url}
+                              alt="image"
+                            />
                           </span>
                           <div className="title">
                             <h3>{data.name}</h3>
@@ -86,7 +84,7 @@ const Service = ({ dark }) => {
                           <a className="dizme_tm_full_link" href="#" />
                           <img
                             className="popup_service_image"
-                            src="img/service/1.jpg"
+                            src={data.image.url}
                             alt="image"
                           />
                         </div>

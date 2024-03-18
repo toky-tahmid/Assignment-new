@@ -70,17 +70,7 @@ const Home = ({ dark }) => {
                     <span>About Me</span>
                   </a>
                 </div>
-                {/* <div className="social">
-  <ul>
-    {data && data?.user?.social_handles?.map((social, i) => (
-      <li key={i}>
-        <a href="#">
-          <i className={` ${social.image.url}`} />
-        </a>
-      </li>
-    ))}
-  </ul>
-</div> */}
+                
 
                 <div className="social">
                   <ul

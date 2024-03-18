@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
 import { fatchData } from "../utilits";
+
 const Partners = ({ dark }) => {
-  const [data, setData] = useState([]);
-  console.log(data);
-  useEffect(async () => {
-    setData(await fatchData("/static/partners.json"));
+  const [partners, setPartners] = useState([]);
+  console.log(partners);
+
+  useEffect(() => {
+    const fetchDataFromJson = async () => {
+      const data = await fatchData("/static/partners.json");
+      setPartners(data);
+    };
+
+    fetchDataFromJson();
   }, []);
+
   return (
     <div className="dizme_tm_section">
       <div className="dizme_tm_partners">
         <div className="container">
           <div className="partners_inner">
             <ul>
-              {data &&
-                data.map((img, i) => (
-                  <li
-                    className="wow fadeIn"
-                    data-wow-duration="1s"
-                    key={i}
-                    data-wow-delay={`0.${i + 1 * 2}s`}
-                  >
-                    <div className="list_inner">
-                      <img
-                        src={img.logo && img.logo[dark ? "dark" : "light"]}
-                        alt="image"
-                      />
-                      <a className="dizme_tm_full_link" href={img.link} />
-                    </div>
-                  </li>
-                ))}
+              {partners.map((partner, index) => (
+                <li
+                  className="wow fadeIn"
+                  data-wow-duration="1s"
+                  key={index}
+                  data-wow-delay={`0.${index + 1 * 2}s`}
+                >
+                  <div className="list_inner">
+                    <img
+                      src={partner.logo.light}
+                      alt="Partner Logo"
+                    />
+                    <a className="dizme_tm_full_link" href={partner.link} />
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -39,4 +46,5 @@ const Partners = ({ dark }) => {
     </div>
   );
 };
+
 export default Partners;

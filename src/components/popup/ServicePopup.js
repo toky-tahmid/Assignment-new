@@ -1,4 +1,5 @@
 const ServicePopup = ( {data, open, close} ) => {
+  console.log(data?.image?.url);
 
   return (
     <div className={`dizme_tm_modalbox ${open ? "opened" : ""}`}>
@@ -15,12 +16,12 @@ const ServicePopup = ( {data, open, close} ) => {
                 <img src={data?.image?.url} alt="image" />
                 <div
                   className="main"
-                  data-img-url={data && data?.image?.url}
-                  style={{ backgroundImage: `url(${data && data?.image?.url})` }}
+                  data-img-url={ data?.image?.url}
+                  style={{ backgroundImage: `url(${ data?.image?.url})` }}
                 />
               </div>
               <div className="main_title">
-                <h3>{data && data.title ? data.title : "Title"}</h3>
+                <h3>{data && data.name ? data.name : "Title"}</h3>
                 <span className="price">
                   Starts from <span>${data && data.charge}</span>
                 </span>

@@ -11,6 +11,7 @@ SwiperCore.use([Pagination, Navigation, EffectFade, Autoplay]);
 
 const Testimonial = () => {
   const [data, setData] = useState({});
+  console.log(data?.user?.testimonials[0]?.image.url);
   useEffect(async () => {
     setData(await fatchData("https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"));
   }, []);
@@ -67,10 +68,11 @@ const Testimonial = () => {
                       </div>
                       <div className="short">
                         <div className="image">
-                          <div className="main" data-img-url={'https://portfolio-image-store.s3.ap-south-1.amazonaws.com/portfolio3/1710357705657-aimydg.png'} />
+                          
+                          <img src={data?.image?.url} alt="image" />
                         </div>
                         <div className="detail">
-                          <h3>{data.name}</h3>
+                          <h3>{data.name}</h3>  
                           <span>{data.position}</span>
                         </div>
                       </div>
